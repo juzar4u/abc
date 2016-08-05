@@ -1,0 +1,38 @@
+﻿@model sakinawedsjuzar.Models.MasterModel
+
+<div class="countdown-section" id="comment" data-stellar-background-ratio="0.3">
+            <div class="container wedding-info">
+                <div class="row">
+                    <div class="col-md-12 text-center wedding-time" data-scroll-reveal="enter after 0.4s">
+                        <div class="bs-docs-example">
+
+
+                            @foreach(var item in Model.comments)
+                            {
+                            <div class="media  white-block">
+                                <a class="pull-left" href="#">
+                                    <img class="media-object img-circle" data-src="holder.js/64x64" alt="64x64" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEYAAABGCAYAAABxLuKEAAAC40lEQVR4Xu2Xi0oqURSGl6RpmaJoYJIRkSUIXfT9H8ErmUl2g8rUGi+leDfWAuWcU6dm1XTwwL9BnD1s1uz98a1/1GYYxpQw3hCwAcz7VgDMX7oFYABGF6QwBsbAGB0BGKPjhYyBMTBGRwDG6HghY2AMjNERgDE6XsgYGANjdARgjI4XMgbGwBgdARij44WMgTEwRkcAxuh4WZox3W6XCoUCtVotstlsFAwGKR6Pk91un++qXq/LmuXlZUokEuRyuT7c8U/UNIPIMjCj0YjS6TQNBgM6Ojqiy8tLenx8pL29Pdrc3JS9jMdjymQy1Gw2aXV19VMwP1HTDBReYxkYhnByckLr6+tiyXvj7u6OSqUSTSYTU2B+ouY/B3N9fU3lcpl2d3dpe3v7zfOHwyGlUiliC/ja6XSKMbVajc7Pz+eg+Prh4YE2Njbk3sXFhbrmZ+1pBo5lxpyenlKlUqG1tTXqdDry7HA4TPv7+5I33Fo3NzcUiUSIzXE4HAKGv3O5HDUaDckkwzAkd7gdr66uvlRz4cDc39+T1+ulw8NDOjs7k4yJRqMUCAQkW3jDPM9ms3MwfI8zJ5/PSz4tLS1RLBYTYxj2V2uaseKjNZYZM2ulnZ0d4g+3Ax/M7/fTysqKzDl7GASH9MwYnk+nU4H19PREbrdbTOJW+07NhQHDBy8Wi/P2mYFhg9gEfu3+OWZwXl5exDAOZYbEbzG25js1PR7Pt9hYZswsXPlgBwcHkg/ValVaZ2tra77J5+fn34zh9dxm/X5fQvv29lZe62yXz+eTwNbWXKiM4ZPzodmadrstWcFAuK04fGfjVzDHx8cSyhzaoVBIYPCcW4hbKplMUq/XU9U086PRjEqWGWPmYf/TGoDBn0idrzAGxsAYHQEYo+OFjIExMEZHAMboeCFjYAyM0RGAMTpeyBgYA2N0BGCMjhcyBsbAGB0BGKPjhYyBMTBGRwDG6HghY2AMjNERgDE6Xq/t+7lbVueddgAAAABJRU5ErkJggg==" style="width: 64px; height: 64px;">
+                                </a>
+                                <div class="media-body">
+                                    <h4 class="media-heading">@item.comment.UserName</h4>
+                                    <p id="para">@item.comment.Content</p>
+                                    @foreach(var comment in item.childcomments)
+                                    {
+                                    <div class="media">
+                                        <a class="pull-left" href="#">
+                                            <img class="media-object img-circle" data-src="holder.js/64x64" alt="64x64" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEYAAABGCAYAAABxLuKEAAAC40lEQVR4Xu2Xi0oqURSGl6RpmaJoYJIRkSUIXfT9H8ErmUl2g8rUGi+leDfWAuWcU6dm1XTwwL9BnD1s1uz98a1/1GYYxpQw3hCwAcz7VgDMX7oFYABGF6QwBsbAGB0BGKPjhYyBMTBGRwDG6HghY2AMjNERgDE6XsgYGANjdARgjI4XMgbGwBgdARij44WMgTEwRkcAxuh4WZox3W6XCoUCtVotstlsFAwGKR6Pk91un++qXq/LmuXlZUokEuRyuT7c8U/UNIPIMjCj0YjS6TQNBgM6Ojqiy8tLenx8pL29Pdrc3JS9jMdjymQy1Gw2aXV19VMwP1HTDBReYxkYhnByckLr6+tiyXvj7u6OSqUSTSYTU2B+ouY/B3N9fU3lcpl2d3dpe3v7zfOHwyGlUiliC/ja6XSKMbVajc7Pz+eg+Prh4YE2Njbk3sXFhbrmZ+1pBo5lxpyenlKlUqG1tTXqdDry7HA4TPv7+5I33Fo3NzcUiUSIzXE4HAKGv3O5HDUaDckkwzAkd7gdr66uvlRz4cDc39+T1+ulw8NDOjs7k4yJRqMUCAQkW3jDPM9ms3MwfI8zJ5/PSz4tLS1RLBYTYxj2V2uaseKjNZYZM2ulnZ0d4g+3Ax/M7/fTysqKzDl7GASH9MwYnk+nU4H19PREbrdbTOJW+07NhQHDBy8Wi/P2mYFhg9gEfu3+OWZwXl5exDAOZYbEbzG25js1PR7Pt9hYZswsXPlgBwcHkg/ValVaZ2tra77J5+fn34zh9dxm/X5fQvv29lZe62yXz+eTwNbWXKiM4ZPzodmadrstWcFAuK04fGfjVzDHx8cSyhzaoVBIYPCcW4hbKplMUq/XU9U086PRjEqWGWPmYf/TGoDBn0idrzAGxsAYHQEYo+OFjIExMEZHAMboeCFjYAyM0RGAMTpeyBgYA2N0BGCMjhcyBsbAGB0BGKPjhYyBMTBGRwDG6HghY2AMjNERgDE6Xq/t+7lbVueddgAAAABJRU5ErkJggg==" style="width: 64px; height: 64px;">
+                                        </a>
+                                        <div class="media-body">
+                                            <h4 class="media-heading">@comment.UserName</h4>
+                                            <p id="para">@comment.Content</p>
+                                        </div>
+                                    </div>
+                                    }
+                                </div>
+                            </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>

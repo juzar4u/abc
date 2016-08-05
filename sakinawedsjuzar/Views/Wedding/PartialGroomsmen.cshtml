@@ -1,0 +1,29 @@
+﻿ 
+@model sakinawedsjuzar.Models.MasterModel
+<div class="white-block">
+                    <p>
+                        @Model.CommonInfo.GroomsmenContent
+                    </p>
+                    <div id="owl_demo_3" class="owl-carousel">
+                        <!-- 1 -->
+                        @foreach(var item in Model.Groomsmens)
+                        {
+                        <div class="item">
+                            <div class="gallery_item frame-border animation fadeIn animated" data-scroll-reveal="enter top move 25px, after 0.4s">
+                                <img class="hover-animation image-zoom-rotate" alt="" src="@item.thumbnail" />
+                                <div class="layer hidden-black-overlay hover-animation fade-in"></div>
+                                <div class="layer hidden-link hover-animation delay1 fade-in">
+                                    <div class="alignment">
+                                        <div class="v-align center-middle">
+                                            <span class="person_name">@item.Name</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        }
+                </div>
+
+
+     </div>
+

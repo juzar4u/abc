@@ -1,0 +1,302 @@
+#main-slider {
+	margin:0; 
+	padding:0;
+	position:relative;
+}
+
+#main-slider.fixed-height{
+	position:relative;
+	height:625px;
+}
+#main-slider.flexslider { 
+	border: none; 
+}
+
+#main-slider .slides,
+#main-slider.flexslider .slides li{
+	position:relative;
+	height:inherit;
+	width:100%;
+	overflow:hidden;
+}
+
+#main-slider.flexslider .flex-viewport{
+	position:relative;
+	height:inherit;
+}
+
+#main-slider .flex-control-nav, .flex-control-paging{
+	 background-color:transparent; !important;
+	 margin:0; padding:0;
+	 position:absolute;
+	 bottom:0;
+	 z-index:4;
+}
+
+#main-slider.flexslider .flex-direction-nav .flex-prev {left: 0px;}
+#main-slider.flexslider .flex-direction-nav .flex-next {right: 0px; text-align: right;}
+#main-slider.flexslider:hover .flex-prev {opacity: 0.3; left: 100px;}
+#main-slider.flexslider:hover .flex-next {opacity: 0.3; right: 100px;}
+
+
+#main-slider .flex-direction-nav a {
+	z-index:4;
+	line-height: 40px;
+}
+
+#main-slider .slide-image {
+	position:relative;
+	height:inherit;
+	width:100%;
+	background-size:cover; 
+	background-position:50% 50%;
+	background-color:#FFF;
+	-webkit-transform: translateZ(0);
+	
+}
+
+#main-slider .slide-video{
+	height: inherit; 
+	width:100%;
+	position:relative;	
+}
+.slide-title-outter-wrapper{
+	position:absolute; 
+	width:100%; 
+	height:inherit; 
+	left:0; 
+	z-index:3;
+	overflow:hidden;
+}
+
+.slide-title-inner-wrapper{
+	width:1170px; 
+	height:inherit; 
+	margin:0 auto; 
+	display: table;
+}
+
+.slide-title{ 
+	display: table-cell;
+	text-align:center;	
+    color:#FFF;
+}
+
+.slide-title h1, .slide-title h2, .slide-title h3,
+.slide-title h4, .slide-title h5, .slide-title h6{
+	color:#FFF;
+}
+
+
+.slide-title.align-middle{
+	vertical-align: middle;
+}
+.slide-title.align-top{
+	vertical-align: top;
+}
+.slide-title.align-bottom{
+	vertical-align: bottom;
+}
+.slider_text {width: auto; height: 100%;/* border: 1px solid; border-color: rgba(0, 0, 0, 0.3); background-color: rgba(0, 0, 0, 0.1); padding-top: 30px;*/}
+.slider_text h1 {font-size: 110px !important;}
+#save-the-date{
+	font-family: 'Pacifico', cursive; 
+	-ms-transform: rotate(-10deg); /* IE 9 */
+    -webkit-transform: rotate(-10deg); /* Chrome, Safari, Opera */
+    transform: rotate(-10deg);
+	padding-top:100px;
+	padding-right:50px;
+	margin-bottom:20px;
+}
+
+#save{
+	font-size:75px; 
+	line-height:50px
+}
+
+#the-date{
+	font-size:62px;
+}
+
+#date{
+	font-size:47px; 
+	line-height:40px;
+}
+
+.pink-dot{
+	color: #f0394d; 
+}
+
+.slide-overlay{
+	position:absolute;
+	top:0;
+	display:block; 
+	width:inherit; 
+	height:inherit; 
+	background-color:#000; 
+	opacity:0.3;
+	-webkit-transform: translateZ(0);
+}
+
+.slide-caption{
+	position:absolute;
+	top:0;
+	display:block;
+	width:inherit; 
+	height:inherit; 
+	color:#fff;	
+}
+
+.use-animation{
+	visibility:hidden
+}
+
+.flexslider .slides.css-fade > li { 
+  	-webkit-transition: opacity 1s ease; 
+	-moz-transition: opacity 1s ease;
+ 	transition: opacity 1s ease; 
+}
+.banner-text{
+	display:inline-block;
+	font-family: 'Oswald', sans-serif; 
+	margin:auto;
+	margin-top:30px;
+	margin-bottom:30px; 	
+	text-align:center
+}
+
+.banner-text.small{
+	padding:2px 30px;  
+}
+
+.banner-text.medium{
+	padding:2px 50px;  
+}
+
+.banner-text.large{
+	padding:2px 70px;  
+}
+
+.banner-text.full{
+	width:100%;
+}
+
+.banner-text_wrap{
+	background: url(../images/heart-icon1.png) no-repeat center top;
+	padding-top: 10px; margin-top: 10px;
+}
+
+.banner-text.light{
+	color:#FFF; 
+	border-bottom:medium double #fff;
+}
+
+.banner-text.light *{
+	color:#FFF;
+}
+
+.banner-text.dark{
+	color:#6a6a6a;
+	border-top:medium double #6a6a6a; 
+	border-bottom:medium double #6a6a6a; 	
+}
+
+.banner-text.dark *{
+	color:#333333;
+}
+
+.banner-text.withlove{
+	position:relative;
+	display:inline-block;
+	font-family: 'Oswald', sans-serif;  
+	margin:auto;
+	margin-top:30px;
+	margin-bottom:30px;
+	text-align:center
+}
+
+.banner-text.withlove:before{
+	display:block;
+	font-family: "fontello";
+	position:absolute;
+	font-size:22px;
+	color:#FFF;
+	content:"\e806";
+	top:-17px;
+	left:0;
+	right:0;
+	margin-left:19px;
+}
+
+.banner-text.withlove.dark:before{
+	color:#e1dddd;
+}
+
+.banner-text.withlove:after{
+	display:block;
+	font-family: "fontello";
+	position:absolute;
+	font-size:22px;
+	color:#f0394d;
+	content:"\e806";
+	top:-17px;
+	left:0;
+	right:0	;
+	margin-right:19px;
+}
+
+@media screen and (max-width: 1200px) {
+	.slide-title-inner-wrapper {width: 100%;}
+}
+
+@media screen and (max-width: 991px) {
+	#main-slider.flexslider:hover .flex-prev {opacity: 0.4;  left: 20px;}
+	#main-slider.flexslider:hover .flex-next {opacity: 0.4; right: 20px;}
+	#main-slider.flexslider .flex-direction-nav .flex-prev {opacity: 0.4; left: 20px;}
+	#main-slider.flexslider .flex-direction-nav .flex-next {opacity: 0.4; right: 20px;}
+	.no-slider-page #content {padding: 140px 0 80px 0;}
+	.slider-title-page #content {padding: 80px 0;}
+	.slider-banner-page #content {padding: 60px 0 80px 0;}
+}
+
+@media screen and (max-width: 768px) and (orientation : landscape) {
+#save-the-date{
+	padding-right:40px;
+	padding-top:0;
+	margin-bottom:0px;	
+}
+
+#save{
+	font-size:50px; 
+	line-height:30px
+}
+
+#the-date{
+	font-size:40px;
+}
+
+#date{
+	font-size:30px; 
+	line-height:20px;
+}
+}
+
+@media only screen and (min-width: 768px) and (max-width: 800px) {
+	.slider_text h1 {font-size: 79px !important;}
+}
+
+@media (max-width: 640px) {
+	.slider_text h1 {font-size: 55px !important;}
+}
+@media screen and (max-width: 480px)  {
+	#save-the-date{padding-right:40px; margin-bottom:0px; padding-top:0;}
+	#save{font-size:60px; line-height:35px}
+	#the-date{font-size:50px;}
+	#date{font-size:40px; line-height:25px;}
+	.section-title{margin-bottom:50px;}
+	.title-excerpt{padding:20px;}
+	#main-slider.flexslider .flex-direction-nav .flex-prev {opacity: 0.4; left: 0px;}
+	#main-slider.flexslider .flex-direction-nav .flex-next {opacity: 0.4; right: 7px;}
+	.banner-text.small, .banner-text.medium, .banner-text.large{padding:0;}
+	.slider_text h1 {font-size: 50px !important;}
+}

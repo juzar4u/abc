@@ -1,0 +1,42 @@
+﻿@model sakinawedsjuzar.Models.MasterModel
+
+ <div class="container">
+                    <div class="row">
+                        <div class="location_body text-center">
+                            <div class="col-md-4 col-sm-6 col-xs-6" data-scroll-reveal="enter left move 25px, after 0.3s">
+                                <div class="location_content">
+                                    <div class="location_icon"><i class="fa fa-map-marker"></i></div>
+                                    <h5>ADDRESS</h5>
+                                    <p>
+                                       @Html.Raw(Model.CommonInfo.Address)
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6 col-xs-6" data-scroll-reveal="enter top move 25px, after 0.3s">
+                                <div class="location_content">
+                                    <div class="location_icon"><i class="fa fa-clock-o"></i></div>
+                                    <h5>Contact info</h5>
+                                    <p>
+                                         @Html.Raw(Model.CommonInfo.ContactInfo)
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6 col-xs-6 map_social" data-scroll-reveal="enter right move 25px, after 0.3s">
+                                <div class="location_content">
+                                    <div class="location_icon"><i class="fa fa-glass fa-6"></i></div>
+                                    <h5>Social</h5>
+                                    <ul class="social_widget list-inline">
+                                        <li><a title="Facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+                                        <li><a title="Twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a title="Instagram" href="#"><i class="fa fa-instagram"></i></a></li>
+                                        <li><a title="Dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>
+                                        <li><a title="Tumblr" href="#"><i class="fa fa-tumblr"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="map_wrap text-center">
+                    <div id="map_canvas" data-map-marker="images/map_icon.png" data-color="#000000" data-address="@Model.CommonInfo.GoogleMapAddress"></div>
+                </div>

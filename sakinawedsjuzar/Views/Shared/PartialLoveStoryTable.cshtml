@@ -1,0 +1,55 @@
+﻿@model List<sakinawedsjuzar.Models.LoveStoryModel>
+
+
+<input type="button" class="btn btn-default col-lg-3 col-xs-3" value="Add New" id="addStory" />
+<div id="AddNewForm" style="display:none">
+    @Html.Partial("~/Views/Shared/PartialLoveStory.cshtml")
+</div>
+
+<br /><br /><br /><br />
+<div class="container col-lg-12 col-xs-3">
+  <h4 style="margin-top:-11px">Stories</h4>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Story Name</th>
+        <th>Publish Date</th>
+        <th>CommentBy</th>
+      </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model)
+        {
+      <tr ng-controller="DeleteLovStory" id="@string.Format("{0}{1}", "tr", item.OurStoryID)">
+        <td>@string.Format("{0}{1}{2}", item.Title1, " ", item.Title2)</td>
+        <td>@item.PublishDate</td>
+       
+          <td>@item.CommentBy</td>
+          <td><a ng-click="deleteThis('@item.OurStoryID')" onclick="trClickfunction('@item.OurStoryID')">Delete</a></td>
+
+      </tr>
+
+        }
+    </tbody>
+  </table>
+</div>
+
+<script type="text/javascript">
+
+    function trClickfunction(val) {
+
+        $('#tr' + val).html('');
+        //alert("tr" + val);
+    }
+    $("#addStory").click(function () {
+        //$.ajax({
+        //    url: "/Wedding/AddNewStory",
+        //    type: "GET",
+        //    dataType: "html",
+        //    success: function (data) {
+        //        $("#AddNewForm").html(data);
+        //    }
+        //});
+        $("#AddNewForm").css('display', 'block');
+    });
+</script>

@@ -1,0 +1,30 @@
+﻿@model sakinawedsjuzar.Models.MasterModel
+ 
+
+<div class="container">
+                <div class="row">
+                    <h1 class="section-title ourstory_h1">@Model.CommonInfo.BrideFullName &amp; @Model.CommonInfo.GroomFullName</h1>
+
+                    <div class="our_story_block">
+                        <div class="story-elem col-sm-6 col-xs-12" data-scroll-reveal="enter left move 50px, after 0.4s">
+                            <div class="image">
+                                <img alt="Couple pic" class="img-responsive" src="@Model.CommonInfo.CouplePictureUrl" />
+                            </div>
+                        </div>
+
+                        <div class="story-elem col-sm-6 col-xs-12" data-scroll-reveal="enter right move 50px, after 0.4s">
+                            <div class="our_txt_block">
+                                <p class="section-desc">
+                                    @Model.CommonInfo.CoupleInfo
+                                </p>
+                                <ul class="sn-icons">
+                                    <li><a title="Facebook" href="#" class="fb"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a title="Twitter" href="#" class="tw"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a title="Rss" href="#" class="rss"><i class="fa fa-rss-square"></i></a></li>
+                                </ul>
+                                <a href="#ourstory_timeline" class="rsvp_btn btn-print our_str_btn" data-scroll>Our Timeline</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>

@@ -1,0 +1,61 @@
+﻿@model sakinawedsjuzar.Models.MasterModel
+
+<div class="white-block">
+
+    @foreach (var item in Model.events)
+    {
+        <div class="row photosection">
+            <div class="col-md-6 col-sm-5 col-xs-12 mob_events_divider" data-scroll-reveal="enter left move 50px, after 0.3s">
+                <div class="carousel slide" id="myCarousel-@item.OurEventID">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        <li class="active" data-slide-to="0" data-target="#myCarousel-@item.OurEventID"></li>
+                        <li data-slide-to="1" data-target="#myCarousel-@item.OurEventID" class=""></li>
+                        <li data-slide-to="2" data-target="#myCarousel-@item.OurEventID" class=""></li>
+                        <li data-slide-to="3" data-target="#myCarousel-@item.OurEventID" class=""></li>
+                        <li data-slide-to="4" data-target="#myCarousel-@item.OurEventID" class=""></li>
+                    </ol>
+                    <!-- Slider Wrappwe -->
+                    <div class="carousel-inner">
+                        <!-- 1 SLIDE -->
+                        @{
+            int i = 0;
+            foreach (var imgs in item.Images)
+            {
+                if (i == 0)
+                {
+                            <div class="item active">
+                                <div class="row text-box">
+                                    <div class="col-md-12">
+                                        <img src="@imgs.Url" alt="" class="img-responsive" height="363" width="560" />
+                                    </div>
+                                </div>
+                            </div>
+                }
+                else
+                {
+                            <div class="item">
+                                <div class="row text-box">
+                                    <div class="col-md-12">
+                                        <img src="@imgs.Url" alt="" class="img-responsive" height="363" width="560" />
+                                    </div>
+                                </div>
+                            </div> 
+                }
+                i++;
+            }
+                        }
+                    </div>
+                    <!-- Navigation -->
+                    <a class="left carousel-control" href="#myCarousel-@item.OurEventID" data-slide="prev"><span class="icon-prev"></span></a>
+                    <a class="right carousel-control" href="#myCarousel-@item.OurEventID" data-slide="next"><span class="icon-next"></span></a>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-7 col-xs-12 mob_events_divider" data-scroll-reveal="enter right move 50px, after 0.3s">
+                <h2 class="photos">@item.Title <strong>@item.EventLocation</strong></h2>
+                <p>@item.EventContent</p>
+            </div>
+        </div>
+        
+    }
+</div>

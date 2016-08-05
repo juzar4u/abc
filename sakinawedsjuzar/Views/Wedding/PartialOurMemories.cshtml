@@ -1,0 +1,46 @@
+﻿@model sakinawedsjuzar.Models.MasterModel
+
+
+<div id="gallery" class="gallery_section text-center">
+    <div class="container">
+        <h1 class="section-title">Our Moments</h1>
+    </div>
+    <div id="owl_demo_1" class="owl-carousel">
+        <!-- 1 -->
+
+        @{
+            int i = 1;
+            foreach (var item in Model.OurMemoriesPhotos)
+            {
+                if (i % 2 != 0)
+                {
+                @:<div class="item">
+                }
+                
+                <div class="gallery_item frame-border animation fadeIn animated" data-scroll-reveal="enter top move 25px, after 0.4s">
+                    <img class="hover-animation image-zoom-rotate" alt="" src="@item.thumbnail" />
+                    <div class="layer hidden-black-overlay hover-animation fade-in"></div>
+                    <div class="layer hidden-link hover-animation delay1 fade-in">
+                        <div class="alignment">
+                            <div class="v-align center-middle">
+                                <a title="Image 1" class="magnific-zoom-gallery" href="@item.Url">
+                                    <object class="de-icon circle light medium-size inline">
+                                        <i class="fa fa-search-plus"></i>
+                                    </object>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                if (i % 2 == 0)
+                {
+                @:</div>
+                }
+
+                i++;
+            }
+            
+            }
+    </div>
+    </div>
+

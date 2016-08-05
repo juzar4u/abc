@@ -1,0 +1,308 @@
+﻿@model sakinawedsjuzar.Models.MasterModel
+
+<div id="wrapper-firefly" class="wrapper">
+
+    <div class="container">
+
+        <!-- Trigger the modal with a button -->
+        <!-- Modal -->
+        <div class="modal fade" id="register" role="dialog">
+            <div class="modal-dialog" style="width:324px;">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Register</h4>
+                    </div>
+                    <div class="modal-body">
+                        @Html.Partial("~/Views/Shared/PartialRegister.cshtml")
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="modal fade" id="signin" role="dialog">
+            <div class="modal-dialog" style="width:324px;">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Sign In</h4>
+                    </div>
+                    <div class="modal-body">
+                        @Html.Partial("~/Views/Shared/PartialLogin.cshtml")
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">@Model.CommonInfo.BrideFullName & @Model.CommonInfo.GroomFullName Portal</h4>
+                    </div>
+                    <div class="modal-body" ng-controller="UpdateController">
+                        @Html.Partial("~/Views/Shared/PartialPostForm.cshtml")
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+            
+        </div>
+
+        <div class="modal fade" id="myLoveStory" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">@Model.CommonInfo.BrideFullName & @Model.CommonInfo.GroomFullName Portal</h4>
+                    </div>
+                    <div class="modal-body">
+                        @{Html.RenderAction("LoveStories", "Wedding", Model);}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="modal fade" id="myEvent" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">@Model.CommonInfo.BrideFullName & @Model.CommonInfo.GroomFullName Portal</h4>
+                    </div>
+                    <div class="modal-body">
+                        @{Html.RenderAction("Events", "Wedding", Model);}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="dropdown col-xs-offset-8 col-lg-offset-10">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Settings
+    <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" id="dropdownList">
+            <li><a href="#" data-toggle="modal" data-target="#signin">SignIn</a></li>
+            <li><a href="#" data-toggle="modal" data-target="#register">Register</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#" data-toggle="modal" data-target="#myModal">Post Common Info</a></li>
+            <li><a href="#" data-toggle="modal" data-target="#myLoveStory">Stories</a></li>
+            <li><a href="#" data-toggle="modal" data-target="#myEvent">Events</a></li>
+        </ul>
+    </div>
+    <div class="main">
+        <!-- Slider Section Start -->
+        @Html.Partial("~/Views/Wedding/PartialMainSlider.cshtml")
+        <!-- Slider Section End -->
+        <div class="clearfix"></div>
+
+        <!-- Our Story Start -->
+        <div id="ourstory">
+            @Html.Partial("~/Views/Wedding/PartialOurStory.cshtml")
+        </div>
+        <!-- Our Story End -->
+        <div class="clearfix"></div>
+
+        <!-- Countdown Section Start -->
+        <h1 class="section-title">We are Launching On:</h1>
+        <div class="countdown-section" id="anchor" data-stellar-background-ratio="0.3">
+            <div class="container wedding-info">
+                <div class="row">
+                    <div class="col-md-12 text-center wedding-time" data-scroll-reveal="enter after 0.4s">
+                        <h3>On @string.Format("{0}{1}{2}{3}{4}", Model.CommonInfo.WeddingDate.ToString("MMMM"), ",", Model.CommonInfo.WeddingDate.Day, " ", Model.CommonInfo.WeddingDate.Year)
+                            <br />
+                            <strong>@Model.CommonInfo.BrideFullName &amp; @Model.CommonInfo.GroomFullName</strong></h3>
+                        <br />
+                        <div id="clock" class="countdown-timer" data-endingdate="@Model.CommonInfo.WeddingDate.ToString("yyyy/MM/dd")"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Countdown Section End -->
+        <div class="clearfix"></div>
+
+        <!-- Gallery Section Start -->
+        @Html.Partial("~/Views/Wedding/PartialOurMemories.cshtml")
+        <!-- Gallery Section End -->
+        <div class="clearfix"></div>
+
+        <!-- Attending Section Start -->
+        @*<div class="countdown-section" id="attending" data-stellar-background-ratio="0.3" style="background: #ff92af">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center" data-scroll-reveal="enter top move 25px, after 0.4s">
+                        <h1 class="section-title title_wh">Are You Attending</h1>
+                        <h3><strong>I need you beside me,</strong>
+                            <br />
+                            always as my best friend, lover and forever soul mate.</h3>
+                        <a href="#rsvp" class="rsvp_btn" data-scroll>RSVP</a>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+        <!-- Attending Section End -->
+        <div class="clearfix"></div>
+
+        <!-- BestPeople Section Start -->
+        <div id="bestpeople" class="gallery_section text-center">
+            <div class="container">
+                <h1 class="section-title">Actresses</h1>
+                @Html.Partial("~/Views/Wedding/PartialBridesmaids.cshtml")
+            </div>
+
+            <div class="container">
+                <h1 class="section-title mt_40">Actors</h1>
+                @Html.Partial("~/Views/Wedding/PartialGroomsmen.cshtml")
+            </div>
+        </div>
+        <!-- BestPeople Section End -->
+        <div class="clearfix"></div>
+
+        <!-- Location Section Start -->
+        <div class="location-section" id="location">
+            @Html.Partial("~/Views/Wedding/PartialGiftRegistry.cshtml")
+            <div id="address_map" class="location-article">
+                @Html.Partial("~/Views/Wedding/PartialAddress_Map.cshtml")
+            </div>
+        </div>
+        <!-- Location Section End -->
+        <div class="clearfix"></div>
+
+        <!-- Our Story Section Start -->
+        <div id="ourstory_timeline">
+            <div class="container">
+                <h1 class="section-title">Our Story</h1>
+            </div>
+            @Html.Partial("~/Views/Wedding/PartialOurLoveStory.cshtml")
+        </div>
+        <!-- Our Story Section End -->
+        <div class="clearfix"></div>
+
+        <!-- Guest Count Section Start -->
+        <div id="guest_count" data-stellar-background-ratio="0.3" style="background-image: url(images/guest_count.jpg); background-attachment: fixed; background-position: 50% -36.65px;">
+            @Html.Partial("~/Views/Wedding/PartialGuestCount.cshtml")
+        </div>
+        <!-- Guest Count Section End -->
+        <div class="clearfix"></div>
+
+        <!-- About Section Start -->
+        <div class="events_section" id="events">
+            <div class="container">
+                <h1 class="section-title">Our Events</h1>
+                @Html.Partial("~/Views/Wedding/PartialOurEvents.cshtml")
+            </div>
+        </div>
+        <!-- About Section End -->
+
+        <!-- Comment Section Start -->
+        <h1 class="section-title">Comments</h1>
+        @Html.Partial("~/Views/Wedding/PartialComment.cshtml")
+        <div class="clearfix"></div>
+
+        <!-- RSVP Start -->
+        @*<div id="rsvp" class="rsvp haslayout" data-stellar-background-ratio="0.3" style="background-image: url(images/slider5.jpg); background-attachment: fixed; background-position: 50% -36.65px;">
+            <div class="container">
+                <div class="row">
+                    <div class="text-area col-sm-6 col-xs-10 col-xs-offset-1 col-sm-offset-3">
+                        <div class="theme-heading" data-scroll-reveal="enter top move 25px, after 0.3s">
+                            <span class="border-title">RSVP</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-8 col-xs-10 col-xs-offset-1 col-sm-offset-2">
+                        <div class="row">
+                            <div class="box" data-scroll-reveal="enter bottom move 15px, after 0.2s">
+                                <div class="holder" data-scroll-reveal="enter bottom move 15px, after 0.2s">
+                                    <div class="frame" data-scroll-reveal="enter bottom move 15px, after 0.2s">
+                                        <h3>Please RSVP before <strong>December 10, 2016</strong></h3>
+                                        <form class="form_rsvp" data-scroll-reveal="enter top move 15px, after 0.2s" action="">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <input type="text" placeholder="Your Name" class="form-control" />
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <input type="email" placeholder="Email" class="form-control" />
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <input type="text" placeholder="Number Of Guests" class="form-control" />
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <span class="jcf-select jcf-unselectable">
+                                                        <select style="position: absolute; height: 100%; width: 100%;" class="jcf-reset-appearance">
+                                                            <option>Select Event</option>
+                                                            <option>Wedding Day</option>
+                                                            <option>Caremony Day</option>
+                                                            <option>The Party</option>
+                                                        </select>
+                                                        <span class="jcf-select-opener"></span>
+                                                    </span>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <button type="submit" class="rsvp_btn btn-iamin">I'm In</button>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <a href="#" class="rsvp_btn btn-print">Print Now!</a>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+        <!-- RSVP End -->
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            $("#dropdownList").css('left', '-60px');
+        }
+    });
+</script>

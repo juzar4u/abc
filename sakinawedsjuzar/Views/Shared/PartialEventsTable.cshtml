@@ -1,0 +1,61 @@
+﻿@model List<sakinawedsjuzar.Models.EventModel>
+
+
+<input type="button" class="btn btn-default col-lg-3 col-xs-3" value="Add New" id="addEvent" />
+<div id="AddEventForm" style="display:none">
+    @Html.Partial("~/Views/Shared/PartialEvents.cshtml")
+
+</div>
+
+<br /><br /><br /><br />
+<div class="container col-lg-12 col-xs-3">
+    <h4 style="margin-top: -11px">J and S Events</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Event</th>
+                <th>Content</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Title</td>
+                    <td>@item.EventLocation</td>
+
+                    <td>
+                        @{
+                string content = "";
+
+                if (item.EventContent.Length > 100)
+                {
+                    content = string.Format("{0}{1}{2}", item.EventContent.Substring(0, 30), " ", "...");
+                }   
+                            @content
+                        }
+
+                    </td>
+                    <td><a href="#">Edit</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script type="text/javascript">
+
+    $("#addEvent").click(function () {
+        //$.ajax({
+        //    url: "/Wedding/AddNewEvent",
+        //    type: "GET",
+        //    dataType: "html",
+        //    success: function (data) {
+        //        $("#AddEventForm").html(data);
+        //    }
+        //});
+
+        $("#AddEventForm").css('display', 'block');
+    });
+</script>
