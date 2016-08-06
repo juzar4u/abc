@@ -237,7 +237,7 @@
         <div>
             <h4 class="control-label">Locational Info Section</h4>
 
-
+            
 
             <div class="form-group">
                 <label class="control-label col-sm-2" for="Address">Address:</label>
@@ -252,7 +252,7 @@
                     <textarea class="form-control" name="ContactInfo" id="ContactInfo" placeholder="Enter Contact Info" ng-model="ContactInfo"></textarea>
                 </div>
             </div>
-
+            <input type="button" onclick="updateInfo()" value="update info" />
             <div class="form-group">
                 <label class="control-label col-sm-2" for="GoogleMapAddress">GoogleMap address Info:</label>
                 <div class="col-sm-10">
@@ -323,21 +323,31 @@
     </form>
 </div>
 <script>
-
+    //function updateInfo()
+    //{
+    //    var item = CKEDITOR.instances["Address"].getData();
+    //        console.log("This is on Jquery event "+item);
+    //        var controllerElement = document.querySelector('[ng-controller="postController"]');
+    //        var controllerScope = angular.element(controllerElement).scope();
+    //        controllerScope.Address = item;
+    //}
     $('#submit').click(function () {
-        var item = CKEDITOR.instances["Address"].getData();
-        console.log(item);
+        var addr = CKEDITOR.instances["Address"].getData(); 
+        var contact = CKEDITOR.instances["ContactInfo"].getData();
+        
         var controllerElement = document.querySelector('[ng-controller="postController"]');
         var controllerScope = angular.element(controllerElement).scope();
-        controllerScope.Address = data.Address;
-
+        controllerScope.Address = addr;
+        controllerScope.ContactInfo = contact;
+        console.log("This is on Jquery event " + controllerScope.Address);
+        console.log("This is on Jquery event " + controllerScope.ContactInfo);
     });
     // Replace the <textarea id="editor1"> with a CKEditor
     // instance, using default configuration.
     CKEDITOR.replace('Address');
     CKEDITOR.replace('ContactInfo');
 
-    $("textarea #Address").focusout(function () {
+    $("#Address").focusout(function () {
 
         //var controllerElement = document.querySelector('[ng-controller="postController"]');
         //var controllerScope = angular.element(controllerElement).scope();

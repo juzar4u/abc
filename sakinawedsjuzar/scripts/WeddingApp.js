@@ -104,16 +104,12 @@ weddingApp.controller('postController', function ($scope, $http) {
     // create a blank object to handle form data.
     //$scope.user = {};
     // calling our submit function.
+
+    console.log("Address from angular" + $scope.Address);
+    console.log("Address from angular" + $scope.ContactInfo);
     $scope.submitForm = function () {
-        // Posting data to php file
-        //var f = document.getElementById('image').files[0];
-        //console.log(f);
-        //$http({
-        //    method: 'POST',
-        //    url: '/api/WeddingAPI/PostFileUpload',
-        //    data: f,
-        //    headers: { 'Content-Type': 'image/jpeg' }
-        //})
+        
+        console.log($scope.Address);
         $http({
             method: 'POST',
             url: '/api/WeddingAPI/PostCommonInfo',
