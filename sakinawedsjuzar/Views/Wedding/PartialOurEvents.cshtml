@@ -10,40 +10,47 @@
                     <!-- Indicators -->
                     <ol class="carousel-indicators">
                         <li class="active" data-slide-to="0" data-target="#myCarousel-@item.OurEventID"></li>
-                        <li data-slide-to="1" data-target="#myCarousel-@item.OurEventID" class=""></li>
-                        <li data-slide-to="2" data-target="#myCarousel-@item.OurEventID" class=""></li>
-                        <li data-slide-to="3" data-target="#myCarousel-@item.OurEventID" class=""></li>
-                        <li data-slide-to="4" data-target="#myCarousel-@item.OurEventID" class=""></li>
+                        @{
+                            int j = 0;
+                            foreach (var img in item.Images)
+                            {
+                                if(j != item.Images.Count - 1)
+                                { 
+                                <li data-slide-to="@j" data-target="#myCarousel-@item.OurEventID" class=""></li>
+                                }
+                                j++;
+                            }
+                        }
                     </ol>
                     <!-- Slider Wrappwe -->
                     <div class="carousel-inner">
                         <!-- 1 SLIDE -->
                         @{
-            int i = 0;
-            foreach (var imgs in item.Images)
-            {
-                if (i == 0)
-                {
-                            <div class="item active">
-                                <div class="row text-box">
-                                    <div class="col-md-12">
-                                        <img src="@imgs.Url" alt="" class="img-responsive" height="363" width="560" />
+                            int i = 0;
+                            foreach (var imgs in item.Images)
+                            {
+                                if (i == 0)
+                                {
+                                    <div class="item active">
+                                        <div class="row text-box">
+                                            <div class="col-md-12">
+                                                <img src="@imgs.Url" alt="" class="img-responsive" height="363" width="560" />
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                }
-                else
-                {
-                            <div class="item">
-                                <div class="row text-box">
-                                    <div class="col-md-12">
-                                        <img src="@imgs.Url" alt="" class="img-responsive" height="363" width="560" />
+                                }
+                                else
+                                {
+                                    <div class="item">
+                                        <div class="row text-box">
+                                            <div class="col-md-12">
+                                                <img src="@imgs.Url" alt="" class="img-responsive" height="363" width="560" />
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div> 
-                }
-                i++;
-            }
+                                }
+                                i++;
+                            }
                         }
                     </div>
                     <!-- Navigation -->
@@ -56,6 +63,6 @@
                 <p>@item.EventContent</p>
             </div>
         </div>
-        
-    }
+
+                            }
 </div>

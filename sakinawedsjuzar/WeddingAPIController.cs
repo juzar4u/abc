@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 using sakinawedsjuzar.Models;
+using sakinawedsjuzar.Models.CommentModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -116,7 +117,8 @@ namespace sakinawedsjuzar
             HttpResponseMessage response = null;
             try
             {
-                LoveStoryModel model = new LoveStoryModel();
+                OurLoveStory model = new OurLoveStory();
+                EntityImage image = new EntityImage();
                 var jObj = (JObject)data;
 
                 model.Title1 = jObj["Title1"].Value<string>();
@@ -126,8 +128,12 @@ namespace sakinawedsjuzar
                 model.PublishDate = jObj["PublishDate"].Value<string>();
                 model.SpecialComment = jObj["SpecialComment"].Value<string>();
                 model.TemplateId = jObj["TemplateId"].Value<int>();
-                model.ImageUrl = jObj["ImageUrl"].Value<string>();
-                //Services.GetInstance.InsertLoveStory(model);
+                //model.ImageUrl = jObj["ImageUrl"].Value<string>();
+                model.OurStoryID = Services.GetInstance.InsertLoveStory(model);
+                image.EntityID = model.OurStoryID;
+                image.SectionID = 3;
+                image.Url = jObj["ImageUrl"].Value<string>();
+                Services.GetInstance.InsertEntityImage(image);
                 response = this.Request.CreateResponse(HttpStatusCode.Created, new { Created = 200, Message = "Data has been Posted successfully!" });
             }
             catch (Exception ex)
@@ -145,13 +151,25 @@ namespace sakinawedsjuzar
             try
             {
                 OurEvent model = new OurEvent();
+
                 var jObj = (JObject)data;
 
                 model.Title = jObj["Title"].Value<string>();
                 model.EventLocation = jObj["EventLocation"].Value<string>();
                 model.EventContent = jObj["EventContent"].Value<string>();
+                string urlcollection = jObj["eventImageUrl"].Value<string>();
+                string[] values = urlcollection.Split(',').Select(sValue => sValue.Trim()).ToArray();
+                model.OurEventID = Services.GetInstance.InsertOurEvent(model);
+                foreach (var item in values)
+                {
+                    EntityImage img = new EntityImage();
+                    img.EntityID = model.OurEventID;
+                    img.SectionID = 2;
+                    img.Url = item;
 
-                //Services.GetInstance.InsertOurEvent(model);
+                    Services.GetInstance.InsertEntityImage(img);
+
+                }
                 response = this.Request.CreateResponse(HttpStatusCode.Created, new { Created = 200, Message = "Data has been Posted successfully!" });
 
             }
@@ -195,7 +213,7 @@ namespace sakinawedsjuzar
 
                 story = Services.GetInstance.GetLoveStoryByLoveStoryID(jObj["OurStoryID"].Value<int>());
 
-               // Services.GetInstance.DeleteLoveStory(story);
+                Services.GetInstance.DeleteLoveStory(story);
                 response = this.Request.CreateResponse(HttpStatusCode.Created, new { Created = 200, Message = "Image has been Deleted Successfully!", storyID = story.OurStoryID });
 
             }
@@ -206,5 +224,80 @@ namespace sakinawedsjuzar
 
             return response;
         }
+
+        public HttpResponseMessage PostDeleteEvent([FromBody]dynamic data)
+        {
+            HttpResponseMessage response = null;
+            try
+            {
+                OurEvent events = new OurEvent();
+                var jObj = (JObject)data;
+
+                events = Services.GetInstance.GetOurEventByID(jObj["EventID"].Value<int>());
+
+                Services.GetInstance.DeleteEvent(events);
+                response = this.Request.CreateResponse(HttpStatusCode.Created, new { Created = 200, Message = "Image has been Deleted Successfully!", eventid = events.OurEventID });
+
+            }
+            catch (Exception ex)
+            {
+                response = this.Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+            }
+
+            return response;
+        }
+
+
+
+        public HttpResponseMessage PostComment([FromBody]dynamic data)
+        {
+            HttpResponseMessage response = null;
+            try
+            {
+                Comment comment = new Comment();
+                var jObj = (JObject)data;
+
+                comment.UserName = jObj["Username"].Value<string>();
+                comment.Content = jObj["Comment"].Value<string>();
+                Services.GetInstance.insertComment(comment);
+                response = this.Request.CreateResponse(HttpStatusCode.Created, new { Created = 200, Message = "Comment has been Posted Successfully!" });
+            }
+            catch (Exception ex)
+            {
+                response = this.Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+            }
+            return response;
+        }
+
+        public HttpResponseMessage PostReplyComment([FromBody]dynamic data)
+        {
+            HttpResponseMessage response = null;
+            try
+            {
+                Comment comment = new Comment();
+                var jObj = (JObject)data;
+                
+                comment.UserName = jObj["Username"].Value<string>();
+                comment.Content = jObj["Comment"].Value<string>();
+                comment.ParentCommentID = jObj["ParentCommentID"].Value<int>();
+                Services.GetInstance.insertComment(comment);
+                response = this.Request.CreateResponse(HttpStatusCode.Created, new { Created = 200, Message = "Comment has been Posted Successfully!" });
+            }
+            catch (Exception ex)
+            {
+                response = this.Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+            }
+            return response;
+        }
+
+
+        public CommentList GetComments()
+        {
+            CommentList comment = new CommentList();
+            comment.ParentComments = Services.GetInstance.GetComments();
+
+            return comment;
+        }
+        
     }
 }

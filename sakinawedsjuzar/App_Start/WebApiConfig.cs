@@ -10,13 +10,28 @@ namespace sakinawedsjuzar
         public static void Register(HttpConfiguration config)
         {
 
+
+
             
-
-
                 config.Routes.MapHttpRoute(
                 "GetCollectionEntityImages",
                 "api/WeddingAPI/GetCollectionEntityImages",
                 new { controller = "WeddingAPI", action = "GetCollectionEntityImages" }
+
+            );
+
+
+            config.Routes.MapHttpRoute(
+            "PostReplyComment",
+            "api/WeddingAPI/PostReplyComment",
+            new { controller = "WeddingAPI", action = "PostReplyComment" }
+
+        );
+
+            config.Routes.MapHttpRoute(
+                "PostComment",
+                "api/WeddingAPI/PostComment",
+                new { controller = "WeddingAPI", action = "PostComment" }
 
             );
 
@@ -26,6 +41,13 @@ namespace sakinawedsjuzar
                 new { controller = "WeddingAPI", action = "PostDeleteLoveStory" }
 
             );
+
+            config.Routes.MapHttpRoute(
+               "PostDeleteEvent",
+               "api/WeddingAPI/PostDeleteEvent",
+               new { controller = "WeddingAPI", action = "PostDeleteEvent" }
+
+           );
             config.Routes.MapHttpRoute(
                 "PostCommonInfo",
                 "api/WeddingAPI/PostCommonInfo",
@@ -53,14 +75,19 @@ namespace sakinawedsjuzar
                 new { controller = "WeddingAPI", action = "PostNewLoveStory" }
 
             );
-
+            
             config.Routes.MapHttpRoute(
                 "GetCommonInfo",
                 "api/WeddingAPI/GetCommonInfo",
                 new { controller = "WeddingAPI", action = "GetCommonInfo" }
 
             );
+            config.Routes.MapHttpRoute(
+                "GetComments",
+                "api/WeddingAPI/GetComments",
+                new { controller = "WeddingAPI", action = "GetComments" }
 
+            );
             config.Routes.MapHttpRoute(
                 "PostFileUpload",
                 "api/WeddingAPI/PostFileUpload",

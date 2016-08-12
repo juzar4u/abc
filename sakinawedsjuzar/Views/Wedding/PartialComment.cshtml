@@ -1,38 +1,176 @@
 ﻿@model sakinawedsjuzar.Models.MasterModel
 
 <div class="countdown-section" id="comment" data-stellar-background-ratio="0.3">
-            <div class="container wedding-info">
-                <div class="row">
-                    <div class="col-md-12 text-center wedding-time" data-scroll-reveal="enter after 0.4s">
-                        <div class="bs-docs-example">
+    <div class="container wedding-info">
+        <div class="row">
+            <div class="col-md-12 text-center wedding-time" data-scroll-reveal="enter after 0.4s">
+                <div class="bs-docs-example" ng-controller="CommentSectionController">
 
-
-                            @foreach(var item in Model.comments)
-                            {
-                            <div class="media  white-block">
-                                <a class="pull-left" href="#">
-                                    <img class="media-object img-circle" data-src="holder.js/64x64" alt="64x64" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEYAAABGCAYAAABxLuKEAAAC40lEQVR4Xu2Xi0oqURSGl6RpmaJoYJIRkSUIXfT9H8ErmUl2g8rUGi+leDfWAuWcU6dm1XTwwL9BnD1s1uz98a1/1GYYxpQw3hCwAcz7VgDMX7oFYABGF6QwBsbAGB0BGKPjhYyBMTBGRwDG6HghY2AMjNERgDE6XsgYGANjdARgjI4XMgbGwBgdARij44WMgTEwRkcAxuh4WZox3W6XCoUCtVotstlsFAwGKR6Pk91un++qXq/LmuXlZUokEuRyuT7c8U/UNIPIMjCj0YjS6TQNBgM6Ojqiy8tLenx8pL29Pdrc3JS9jMdjymQy1Gw2aXV19VMwP1HTDBReYxkYhnByckLr6+tiyXvj7u6OSqUSTSYTU2B+ouY/B3N9fU3lcpl2d3dpe3v7zfOHwyGlUiliC/ja6XSKMbVajc7Pz+eg+Prh4YE2Njbk3sXFhbrmZ+1pBo5lxpyenlKlUqG1tTXqdDry7HA4TPv7+5I33Fo3NzcUiUSIzXE4HAKGv3O5HDUaDckkwzAkd7gdr66uvlRz4cDc39+T1+ulw8NDOjs7k4yJRqMUCAQkW3jDPM9ms3MwfI8zJ5/PSz4tLS1RLBYTYxj2V2uaseKjNZYZM2ulnZ0d4g+3Ax/M7/fTysqKzDl7GASH9MwYnk+nU4H19PREbrdbTOJW+07NhQHDBy8Wi/P2mYFhg9gEfu3+OWZwXl5exDAOZYbEbzG25js1PR7Pt9hYZswsXPlgBwcHkg/ValVaZ2tra77J5+fn34zh9dxm/X5fQvv29lZe62yXz+eTwNbWXKiM4ZPzodmadrstWcFAuK04fGfjVzDHx8cSyhzaoVBIYPCcW4hbKplMUq/XU9U086PRjEqWGWPmYf/TGoDBn0idrzAGxsAYHQEYo+OFjIExMEZHAMboeCFjYAyM0RGAMTpeyBgYA2N0BGCMjhcyBsbAGB0BGKPjhYyBMTBGRwDG6HghY2AMjNERgDE6Xq/t+7lbVueddgAAAABJRU5ErkJggg==" style="width: 64px; height: 64px;">
-                                </a>
-                                <div class="media-body">
-                                    <h4 class="media-heading">@item.comment.UserName</h4>
-                                    <p id="para">@item.comment.Content</p>
-                                    @foreach(var comment in item.childcomments)
-                                    {
-                                    <div class="media">
-                                        <a class="pull-left" href="#">
-                                            <img class="media-object img-circle" data-src="holder.js/64x64" alt="64x64" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEYAAABGCAYAAABxLuKEAAAC40lEQVR4Xu2Xi0oqURSGl6RpmaJoYJIRkSUIXfT9H8ErmUl2g8rUGi+leDfWAuWcU6dm1XTwwL9BnD1s1uz98a1/1GYYxpQw3hCwAcz7VgDMX7oFYABGF6QwBsbAGB0BGKPjhYyBMTBGRwDG6HghY2AMjNERgDE6XsgYGANjdARgjI4XMgbGwBgdARij44WMgTEwRkcAxuh4WZox3W6XCoUCtVotstlsFAwGKR6Pk91un++qXq/LmuXlZUokEuRyuT7c8U/UNIPIMjCj0YjS6TQNBgM6Ojqiy8tLenx8pL29Pdrc3JS9jMdjymQy1Gw2aXV19VMwP1HTDBReYxkYhnByckLr6+tiyXvj7u6OSqUSTSYTU2B+ouY/B3N9fU3lcpl2d3dpe3v7zfOHwyGlUiliC/ja6XSKMbVajc7Pz+eg+Prh4YE2Njbk3sXFhbrmZ+1pBo5lxpyenlKlUqG1tTXqdDry7HA4TPv7+5I33Fo3NzcUiUSIzXE4HAKGv3O5HDUaDckkwzAkd7gdr66uvlRz4cDc39+T1+ulw8NDOjs7k4yJRqMUCAQkW3jDPM9ms3MwfI8zJ5/PSz4tLS1RLBYTYxj2V2uaseKjNZYZM2ulnZ0d4g+3Ax/M7/fTysqKzDl7GASH9MwYnk+nU4H19PREbrdbTOJW+07NhQHDBy8Wi/P2mYFhg9gEfu3+OWZwXl5exDAOZYbEbzG25js1PR7Pt9hYZswsXPlgBwcHkg/ValVaZ2tra77J5+fn34zh9dxm/X5fQvv29lZe62yXz+eTwNbWXKiM4ZPzodmadrstWcFAuK04fGfjVzDHx8cSyhzaoVBIYPCcW4hbKplMUq/XU9U086PRjEqWGWPmYf/TGoDBn0idrzAGxsAYHQEYo+OFjIExMEZHAMboeCFjYAyM0RGAMTpeyBgYA2N0BGCMjhcyBsbAGB0BGKPjhYyBMTBGRwDG6HghY2AMjNERgDE6Xq/t+7lbVueddgAAAABJRU5ErkJggg==" style="width: 64px; height: 64px;">
-                                        </a>
+                        <div class="media  white-block" ng-repeat="item in data.comment">
+                            @*<a class="pull-left" href="#">
+                                    <img class="media-object img-circle" data-src="holder.js/64x64" alt="64x64" src="" style="width: 64px; height: 64px;">
+                                </a>*@
+                            <div class="media-body">
+                                <h4 class="media-heading">{{item.comment.UserName}}</h4>
+                                <p id="para">{{item.comment.Content}}</p>
+                                
+                                    <div class="col-xs-offset-3 media" ng-repeat="comment in item.childcomments">
+                                        @*<a class="pull-left" href="#">
+                                                <img class="media-object img-circle" data-src="holder.js/64x64" alt="64x64" src="" style="width: 64px; height: 64px;">
+                                            </a>*@
                                         <div class="media-body">
-                                            <h4 class="media-heading">@comment.UserName</h4>
-                                            <p id="para">@comment.Content</p>
+                                            <h4 class="media-heading">{{comment.UserName}}</h4>
+                                            <p id="para">{{comment.Content}}</p>
                                         </div>
                                     </div>
-                                    }
+                                
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-offset-10">
+                                    <button type="button" class="btn btn-info"  onclick="replyFunction({{item.comment.CommentID}})"><i class="fa fa-reply fa-lg" aria-hidden="true">Reply</i></button>
+
+                                </div>
+                                <div ng-controller="PostReplyController" id="replycomment{{item.comment.CommentID}}" style="display:none">
+
+                                    <form class="form-horizontal" role="form">
+
+                                        <h3 class="bg-success">{{message}}</h3>
+                                        <h3 class="bg-danger" id="replycommentError">{{errorName}}</h3>
+
+                                        <div class="row" style="margin:20px;">
+                                            <h4>Add Comment</h4>
+                                            
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-2" for="replyusername">Name:</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" name="replyusername" id="replyusername{{item.comment.CommentID}}" placeholder="Enter Name" ng-model="Replyusername" onkeypress="keypressUsernameFunction({{item.comment.CommentID}})">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-2" for="replycomment">Comment:</label>
+                                                <div class="col-sm-8">
+                                                    <textarea class="form-control" name="replycommentcontent" id="replycommentcontent{{item.comment.CommentID}}" placeholder="Enter Comment" ng-model="Replycomment" onkeypress="keypressCommentFunction({{item.comment.CommentID}})"></textarea>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-10">
+                                                    <button type="submit" class="btn btn-default" ng-click="submit()" id="submitreplycommentId" onclick="replyCommentFunction({{item.comment.CommentID}})">Submit</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+
                                 </div>
                             </div>
-                            }
                         </div>
-                    </div>
+                    
                 </div>
             </div>
         </div>
+        <div ng-controller="PostCommentController">
+            <form class="form-horizontal" role="form">
+
+                <h3 class="bg-success">{{message}}</h3>
+                <h3 class="bg-danger" id="commentError">{{errorName}}</h3>
+
+                <div class="row" style="margin:20px;">
+                    <h4>Add Comment</h4>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="username">Name:</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="username" id="username" placeholder="Enter Name" ng-model="username">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="comment">Comment:</label>
+                        <div class="col-sm-8">
+                            <textarea class="form-control" name="commentcontent" id="commentcontent" placeholder="Enter Comment" ng-model="comment"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-10">
+                            <button type="submit" class="btn btn-default" ng-click="submit()" id="submitcommentId">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+<script type="text/javascript">
+    $("#submitcommentId").click(function () {
+        if ($("#username").val() == "") {
+            $("#username").addClass('alert-danger');
+            if ($("#commentcontent").val() == "") {
+                $('#commentcontent').addClass('alert-danger')
+                return false;
+            }
+
+            return false;
+        }
+
+        if ($("#commentcontent").val() == "") {
+            $('#commentcontent').addClass('alert-danger')
+            return false;
+        }
+    });
+
+    $("#username").keypress(function () {
+        $("#username").removeClass('alert-danger');
+    });
+    $("#commentcontent").keypress(function () {
+        $("#commentcontent").removeClass('alert-danger');
+    });
+
+    function replyFunction(val){
+        $("#replycomment"+val).css('display', 'block');
+        $("#replyParentCommentID").val(val);
+
+        
+    }
+    
+    $("#replyusername").keypress(function () {
+        $("#username").removeClass('alert-danger');
+    });
+    $("#replycommentcontent").keypress(function () {
+        $("#replycommentcontent").removeClass('alert-danger');
+    });
+
+    function replyCommentFunction(val) {
+        console.log("this is a parentCommentID from jquery" + val);
+        if ($("#replyusername"+val).val() == "") {
+            $("#replyusername" + val).addClass('alert-danger');
+            if ($("#replycommentcontent" + val).val() == "") {
+                $('#replycommentcontent' + val).addClass('alert-danger')
+                return false;
+            }
+
+            return false;
+        }
+
+        if ($("#replycommentcontent" + val).val() == "") {
+            $('#replycommentcontent' + val).addClass('alert-danger')
+            return false;
+        }
+
+        var controllerElement = document.querySelector('[ng-controller="PostReplyController"]');
+        var controllerScope = angular.element(controllerElement).scope();
+        console.log("jqurey set value to angular scope"+ val);
+        controllerScope.replyParentCommentID = val;
+    }
+
+    function keypressUsernameFunction(val) {
+        if ($('#replyusername' + val).hasClass('alert-danger')) {
+            $('#replyusername' + val).removeClass('alert-danger');
+        }
+    } function keypressCommentFunction(val) {
+        if ($('#replycommentcontent' + val).hasClass('alert-danger')) {
+            $('#replycommentcontent' + val).removeClass('alert-danger');
+        }
+    } 
+</script>

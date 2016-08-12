@@ -33,6 +33,14 @@ namespace sakinawedsjuzar.Models
             }
         }
 
+        public int insertComment(Comment model)
+        {
+            using (PetaPoco.Database context = new PetaPoco.Database("DefaultConnection"))
+            {
+                return (int)context.Insert(model);
+            }
+        }
+
         public int DeleteEntityImage(EntityImage model)
         {
             using (PetaPoco.Database context = new PetaPoco.Database("DefaultConnection"))
@@ -48,6 +56,15 @@ namespace sakinawedsjuzar.Models
                 return (int)context.Delete(model);
             }
         }
+
+        public int DeleteEvent(OurEvent model)
+        {
+            using (PetaPoco.Database context = new PetaPoco.Database("DefaultConnection"))
+            {
+                return (int)context.Delete(model);
+            }
+        }
+
 
         public int InsertLoveStory(OurLoveStory model)
         {
@@ -138,8 +155,7 @@ namespace sakinawedsjuzar.Models
 
         public List<CommentMaster> GetComments()
         {
-            List<CommentMaster> models = new List<CommentMaster>();
-            List<CommentItem> comments = new List<CommentItem>();
+            List<CommentItem> childcomments = new List<CommentItem>();
 
             using (PetaPoco.Database context = new PetaPoco.Database("DefaultConnection"))
             {
@@ -148,18 +164,17 @@ namespace sakinawedsjuzar.Models
                 foreach (var item in comments)
                 {
 
-                    models.Add(new CommentMaster()
-                    {
-                        comment = item,
+                    //models.Add(new CommentMaster()
+                    //{
+                    //    comment = item,
                         
-                        childcomments = context.Fetch<CommentItem>("select * from Comments where ParentCommentID = @0", item.CommentID)
-                    });
+                    //    childcomments = context.Fetch<CommentItem>("select * from Comments where ParentCommentID = @0", item.CommentID)
+                    //});
                 }
             }
             return models;
 
         }
-
 
         public EntityImage GetEntityImageByImageID(int id)
         {
@@ -174,6 +189,14 @@ namespace sakinawedsjuzar.Models
             using (PetaPoco.Database context = new PetaPoco.Database("DefaultConnection"))
             {
                 return context.Fetch<OurLoveStory>("select * from OurLoveStory where OurStoryID = @0", id).FirstOrDefault();
+            }
+        }
+
+        public OurEvent GetOurEventByID(int id)
+        {
+            using (PetaPoco.Database context = new PetaPoco.Database("DefaultConnection"))
+            {
+                return context.Fetch<OurEvent>("select * from OurEvents where OurEventID = @0", id).FirstOrDefault();
             }
         }
     }

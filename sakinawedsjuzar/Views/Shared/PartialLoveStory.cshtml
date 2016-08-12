@@ -1,10 +1,11 @@
 ﻿
 <div ng-controller="PostLoveStoryController">
     <h4 class="control-label">Post Story</h4>
+
     <form class="form-horizontal" role="form" ng-submit="uploadFile()">
 
         <h3 class="bg-success">{{message}}</h3>
-        <h3 class="bg-danger">{{errorName}}</h3>
+        <h3 class="bg-danger" id="errMsg">{{errorName}}</h3>
         <div class="form-group">
             <label class="control-label col-sm-2" for="Title1">Title 1:</label>
             <div class="col-sm-10">
@@ -55,25 +56,40 @@
                 <input type="file" name="file" id="fileLoveStory" file-model="file" class="form-control" />
                 
             </div>
-            <output id="list-LoveStory"></output>
+           
         </div>
-
+        <output id="list-LoveStory"></output>
         <div  id="demo"></div>
-         <div class="form-group">
+         @*<div class="form-group">
             <div class="col-sm-10">
-              <select id="TemplateId" name="TemplateId" ng-model="TemplateId">
-                  <option value="1">Right Template Style</option>
-                  <option value="2">Left Template Style</option>
-              </select>
+                <label class="control-label col-sm-2" for="myFile">Select Template</label>
+                <div class="col-sm-10">
+                    <select id="TemplateId" name="TemplateId" ng-model="TemplateId" class="form-control">
+                        <option value="1">Right Template Style</option>
+                        <option value="2">Left Template Style</option>
+                    </select>
+                </div>
+                </div>
+
+        </div>*@
+        <div class="form-group ">
+            <label class="control-label col-sm-2" for="select">
+                Select a Choice
+            </label>
+            <div class="col-sm-10">
+                <select class="select form-control" id="TemplateId" name="TemplateId" ng-model="TemplateId">
+                    <option value="1">Right Template Style</option>
+                    <option value="2">Left Template Style</option>
+                </select>
             </div>
         </div>
-
         <div class="form-group">
             <div class="col-sm-offset-10">
                 <button type="submit" class="btn btn-default" ng-click="submit()">Submit</button>
             </div>
         </div>
-
+        <h3 class="bg-success">{{message}}</h3>
+        <h3 class="bg-danger">{{errorName}}</h3>
     </form>
 </div>
 
@@ -139,7 +155,7 @@
             });
         }
         else {
-
+            $("#errMsg").html('Please select .jpg Image only!');
         }
 
     }

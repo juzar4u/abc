@@ -213,16 +213,16 @@ weddingApp.controller("PostEventController", function ($scope, $http) {
 
 
     $scope.submitEvent = function () {
-
+        
         $http({
             method: 'POST',
             url: "/api/WeddingAPI/PostNewEvent",
             data: {
                 "Title": $scope.Title,
                 "EventLocation": $scope.EventLocation,
-                "EventContent": $scope.EventContent
-
-            },
+                "EventContent":  $scope.EventContent,
+                "eventImageUrl": $scope.eventImageUrl
+            }, 
             headers: { 'Content-Type': 'application/json' }
 
         })
@@ -254,5 +254,82 @@ weddingApp.controller("DeleteLovStory", function ($scope, $http){
               //getEntities();
           });
     }
+
+});
+
+
+weddingApp.controller("DeleteEvent", function ($scope, $http) {
+
+    $scope.deleteThis = function (data) {
+
+        $http({
+            method: 'POST',
+            url: '/api/WeddingAPI/PostDeleteEvent',
+            data: {
+                "EventID": data
+            }, //forms user object
+            headers: { 'Content-Type': 'application/json' }
+        })
+          .success(function (data) {
+              //getEntities();
+          });
+    }
+
+});
+
+weddingApp.controller("PostCommentController", function ($scope, $http) {
+
+    $scope.submit = function () {
+
+        $http({
+            method: 'POST',
+            url: '/api/WeddingAPI/PostComment',
+            data: {
+                "Username": $scope.username,
+                "Comment": $scope.comment
+            }, //forms user object
+            headers: { 'Content-Type': 'application/json' }
+        })
+          .success(function (data) {
+              $scope.message = data.Message;
+              $window.location.reload()
+          });
+    }
+
+});
+
+weddingApp.controller("PostReplyController", function ($scope, $http) {
+
+    $scope.submit = function () {
+        console.log("from angularController" + $scope.replyParentCommentID);
+        $http({
+            method: 'POST',
+            url: '/api/WeddingAPI/PostReplyComment',
+            data: {
+                "Username": $scope.Replyusername,
+                "ParentCommentID": $scope.replyParentCommentID,
+                "Comment": $scope.Replycomment
+            }, //forms user object
+            headers: { 'Content-Type': 'application/json' }
+        })
+          .success(function (data) {
+              $scope.message = data.Message;
+              
+          });
+    }
+
+});
+weddingApp.controller("CommentSectionController", function ($scope, $http) {
+
+        $http({
+            method: 'GET',
+            url: '/api/WeddingAPI/GetComments', 
+            headers: { 'Content-Type': 'application/json' }
+        })
+          .success(function (data) {
+              console.log(data.Comments);
+              console.log(data.Comments.childcomments);
+          });
+    
 
 });

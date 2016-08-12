@@ -21,23 +21,23 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
+                <tr ng-controller="DeleteEvent" id="@string.Format("{0}{1}", "tr", item.OurEventID)">
                     <td>@item.Title</td>
                     <td>@item.EventLocation</td>
 
                     <td>
                         @{
-                string content = "";
+                            string content = "";
 
-                if (item.EventContent.Length > 100)
-                {
-                    content = string.Format("{0}{1}{2}", item.EventContent.Substring(0, 30), " ", "...");
-                }   
+                            if (item.EventContent.Length > 100)
+                            {
+                                content = string.Format("{0}{1}{2}", item.EventContent.Substring(0, 30), " ", "...");
+                            }
                             @content
                         }
 
                     </td>
-                    <td><a href="#">Edit</a></td>
+                    <td><a ng-click="deleteThis('@item.OurEventID')" onclick="trClickfunction('@item.OurEventID')">Delete</a></td>
                 </tr>
             }
         </tbody>
@@ -47,15 +47,6 @@
 <script type="text/javascript">
 
     $("#addEvent").click(function () {
-        //$.ajax({
-        //    url: "/Wedding/AddNewEvent",
-        //    type: "GET",
-        //    dataType: "html",
-        //    success: function (data) {
-        //        $("#AddEventForm").html(data);
-        //    }
-        //});
-
         $("#AddEventForm").css('display', 'block');
     });
 </script>

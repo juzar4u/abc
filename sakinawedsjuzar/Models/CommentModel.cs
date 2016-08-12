@@ -16,7 +16,11 @@ namespace sakinawedsjuzar.Models.CommentModel
 
     public class CommentMaster
     {
-        public CommentItem comment { get; set; }
         public List<CommentItem> childcomments { get; set; }
+    }
+
+    public class CommentList
+    {
+        public List<CommentMaster> ParentComments { get; set; }
     }
 }
