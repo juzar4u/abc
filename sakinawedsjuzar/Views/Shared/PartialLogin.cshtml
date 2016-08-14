@@ -1,21 +1,51 @@
-﻿<form class="form-horizontal" role="form">
+﻿@model sakinawedsjuzar.Models.AccountModel.LoginModel
+
+@using (Html.BeginForm("Login", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
     <h3 class="bg-success" role="alert" id="topMessage">{{message}}</h3>
-    <h3 class="bg-danger" role="alert">{{errorName}}</h3>
+    <h3 class="bg-danger" role="alert" id="errorLogin">{{errorName}}</h3>
     <div class="col-sm-6 col-lg-12">
         <div class="form-group input-group">
             <span class="input-group-addon">
                 <span class="fa fa-envelope fa-lg"></span>
             </span>
-            <input type="text" class="form-control" placeholder="Enter Email">
+            <input type="text" class="form-control" placeholder="Enter Email" id="Username" name="Username">
         </div>
 
         <div class="form-group input-group">
             <span class="input-group-addon">
                 <span class="fa fa-asterisk fa-lg"></span>
             </span>
-            <input type="text" class="form-control" placeholder="Enter Password">
+            <input type="text" class="form-control" placeholder="Enter Password" id="Password" name="Password">
         </div>
         <br />
-        <input type="submit" class="btn btn-default" value="Submit" />
+        <input type="submit" class="btn btn-default" value="Submit" id="submitLogin" />
     </div>
-</form>
+}
+
+
+<script type="text/javascript">
+    $("#submitLogin").click(function () {
+        if ($("#Username").val() != '' && $("#Password").val() != '') {
+
+            $.ajax({
+                url: "/Account/CheckUser",
+                type: "GET",
+                dataType: "html",
+                data: { "username": $("#Username").val(), "password": $("#Password").val() },
+                success: function (data) {
+                    if (data == false) {
+                        $("#errorLogin").html('Login Failed');
+                        return false;
+                    }
+
+                }
+                
+            });
+        }
+        else {
+            $("#errorLogin").html('The fields are Required fields');
+            return false;
+        }
+    });
+</script>

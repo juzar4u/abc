@@ -351,7 +351,7 @@ namespace sakinawedsjuzar
 
 
 	[ExplicitColumns]
-    public partial class ContactU : DefaultConnectionDB.Record<ContactU>  
+    public partial class ContactUs : DefaultConnectionDB.Record<ContactUs>  
     {
 
 
@@ -368,7 +368,7 @@ namespace sakinawedsjuzar
 
 
 
-		[Column] public int? PhoneNo { get; set; }
+		[Column] public string PhoneNo { get; set; }
 
 
 
@@ -424,7 +424,9 @@ namespace sakinawedsjuzar
 
 
 
-	}
+        [Column] public DateTime datetimenow { get; set; }
+
+    }
 
     
 
@@ -535,6 +537,63 @@ namespace sakinawedsjuzar
 
 
 	}
+
+    [TableName("dbo.Users")]
+
+
+
+    [PrimaryKey("Users")]
+
+
+
+    [ExplicitColumns]
+    public partial class Users : DefaultConnectionDB.Record<Users>
+    {
+
+
+
+        [Column]
+        public int UserID { get; set; }
+
+
+
+
+
+        [Column]
+        public string Email { get; set; }
+
+
+
+
+
+        [Column]
+        public string Password { get; set; }
+
+
+
+
+
+        [Column]
+        public string Fullname { get; set; }
+
+
+
+
+
+        [Column]
+        public DateTime CreatedOn { get; set; }
+
+
+        [Column]
+        public int UserRoleID { get; set; }
+
+        [Column]
+        public string ProfilePictureUrl { get; set; }
+
+
+
+
+    }
 
 
 }

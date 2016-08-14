@@ -1,4 +1,5 @@
-﻿using sakinawedsjuzar.Models.CommentModel;
+﻿using sakinawedsjuzar.Models.AccountModel;
+using sakinawedsjuzar.Models.CommentModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,6 +39,16 @@ namespace sakinawedsjuzar.Models
             using (PetaPoco.Database context = new PetaPoco.Database("DefaultConnection"))
             {
                 return (int)context.Insert(model);
+            }
+        }
+
+        public int InsertContactUs(ContactUs model)
+        {
+            ContactUs contactUs = new ContactUs();
+            using (PetaPoco.Database context = new PetaPoco.Database("DefaultConnection"))
+            {
+                contactUs = model;
+                return (int)context.Insert(contactUs);
             }
         }
 
@@ -153,26 +164,19 @@ namespace sakinawedsjuzar.Models
         }
 
 
-        public List<CommentMaster> GetComments()
+        public CommentList GetComments()
         {
-            List<CommentItem> childcomments = new List<CommentItem>();
-
+            CommentList commentList = new CommentList();
             using (PetaPoco.Database context = new PetaPoco.Database("DefaultConnection"))
             {
-                comments = context.Fetch<CommentItem>("select * from Comments where ParentCommentID is null");
+                commentList.ParentComments = context.Fetch<ParentCommentItem>("select * from Comments where ParentCommentID is null order by datetimenow desc");
 
-                foreach (var item in comments)
+                foreach (var item in commentList.ParentComments)
                 {
-
-                    //models.Add(new CommentMaster()
-                    //{
-                    //    comment = item,
-                        
-                    //    childcomments = context.Fetch<CommentItem>("select * from Comments where ParentCommentID = @0", item.CommentID)
-                    //});
+                    item.childcomments = context.Fetch<CommentItem>("select * from Comments where ParentCommentID = @0 order by datetimenow desc", item.CommentID);
                 }
             }
-            return models;
+            return commentList;
 
         }
 
@@ -199,5 +203,48 @@ namespace sakinawedsjuzar.Models
                 return context.Fetch<OurEvent>("select * from OurEvents where OurEventID = @0", id).FirstOrDefault();
             }
         }
+
+        public bool isCommentExist(string name, string content)
+        {
+            bool isExists = false;
+            Comment comment = new Comment();
+            using (PetaPoco.Database context = new PetaPoco.Database("DefaultConnection"))
+            {
+                comment = context.Fetch<Comment>("select * from Comments where UserName = @0 and Content = @1", name, content).FirstOrDefault();
+                if(comment == null)
+                {
+                    isExists = false;
+                }
+                else
+                {
+                    isExists = true;
+                }
+            }
+            return isExists;
+        }
+
+
+        public UserModel GetUserModelByEmailID(string emailid)
+        {
+            UserModel user = new UserModel();
+            using (PetaPoco.Database context = new PetaPoco.Database("DefaultConnection"))
+            {
+                user = context.Fetch<UserModel>("select * from Users where Email = @0", emailid).FirstOrDefault();
+            }
+
+            return user;
+        }
+
+
+        public UserModel GetUserByEmailandPassword(string email, string password)
+        {
+            
+            using (PetaPoco.Database context = new PetaPoco.Database("DefaultConnection"))
+            {
+               return context.Fetch<UserModel>("select * from Users where Email = @0 and Password = @1", email, password).FirstOrDefault();
+            }
+        }
+
+
     }
 }

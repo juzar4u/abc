@@ -20,7 +20,6 @@ namespace sakinawedsjuzar
 
             );
 
-
             config.Routes.MapHttpRoute(
             "PostReplyComment",
             "api/WeddingAPI/PostReplyComment",
@@ -35,6 +34,12 @@ namespace sakinawedsjuzar
 
             );
 
+            config.Routes.MapHttpRoute(
+                "PostContactUsData",
+                "api/WeddingAPI/PostContactUsData",
+                new { controller = "WeddingAPI", action = "PostContactUsData" }
+
+            );
             config.Routes.MapHttpRoute(
                 "PostDeleteLoveStory",
                 "api/WeddingAPI/PostDeleteLoveStory",

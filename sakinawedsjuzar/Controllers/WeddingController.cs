@@ -1,4 +1,6 @@
-﻿using sakinawedsjuzar.Models;
+﻿using sakinawedsjuzar.Helper;
+using sakinawedsjuzar.Models;
+using sakinawedsjuzar.Models.AccountModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +17,14 @@ namespace sakinawedsjuzar.Controllers
         public ActionResult Index()
         {
             MasterModel model = new MasterModel();
+
+            UserModel user = AuthHelper.LoginFromCookie();
+
+            if (user != null)
+            {
+                model.isUserLoggedin = true;
+            }
+            model.loginModel = new Models.AccountModel.LoginModel();
             model.CommonInfo = Services.GetInstance.GetCommonInfo();
             model.MainSlideImages = Services.GetInstance.GetMainSliderImages();
             model.OurMemoriesPhotos = Services.GetInstance.GetImagesBySectionID(1);
@@ -22,6 +32,7 @@ namespace sakinawedsjuzar.Controllers
             model.Groomsmens = Services.GetInstance.GetImagesBySectionID(5);
             model.lovestories = Services.GetInstance.GetLoveStories();
             model.events = Services.GetInstance.GetEvents();
+            //model.comments = Services.GetInstance.GetComments();
             model.comments = Services.GetInstance.GetComments();
             return View(model);
         }

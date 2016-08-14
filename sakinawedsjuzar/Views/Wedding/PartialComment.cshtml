@@ -1,71 +1,86 @@
 ﻿@model sakinawedsjuzar.Models.MasterModel
-
+<style>
+    .dateNow{
+        letter-spacing: 1px;
+    padding: 1px 10px;
+    background-color: #26cbbd;
+    font-size: 12px;
+    line-height: 20px;
+    color: #fff;
+    text-align: center;
+    }
+</style>
 <div class="countdown-section" id="comment" data-stellar-background-ratio="0.3">
     <div class="container wedding-info">
         <div class="row">
             <div class="col-md-12 text-center wedding-time" data-scroll-reveal="enter after 0.4s">
-                <div class="bs-docs-example" ng-controller="CommentSectionController">
+                <div class="bs-docs-example">
 
-                        <div class="media  white-block" ng-repeat="item in data.comment">
+                    @foreach(var item in Model.comments.ParentComments)
+                    { 
+                        <div class="media  white-block">
                             @*<a class="pull-left" href="#">
                                     <img class="media-object img-circle" data-src="holder.js/64x64" alt="64x64" src="" style="width: 64px; height: 64px;">
                                 </a>*@
+                            <div><span class="dateNow pull-right">@item.datetimenow.ToString("dd-MMM-yyyy")</span></div><br /><br />
                             <div class="media-body">
-                                <h4 class="media-heading">{{item.comment.UserName}}</h4>
-                                <p id="para">{{item.comment.Content}}</p>
-                                
-                                    <div class="col-xs-offset-3 media" ng-repeat="comment in item.childcomments">
+                                <h4 class="media-heading">@item.UserName</h4>
+                                <p id="para">@item.Content</p>
+                                @*@foreach(var comment in item.childcomments)
+                                { 
+                                    <div class="col-xs-offset-3 media">
                                         @*<a class="pull-left" href="#">
                                                 <img class="media-object img-circle" data-src="holder.js/64x64" alt="64x64" src="" style="width: 64px; height: 64px;">
-                                            </a>*@
+                                            </a>
                                         <div class="media-body">
-                                            <h4 class="media-heading">{{comment.UserName}}</h4>
-                                            <p id="para">{{comment.Content}}</p>
+                                            <h4 class="media-heading">@comment.UserName</h4>
+                                            <p id="para">@comment.Content</p>
                                         </div>
                                     </div>
-                                
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-offset-10">
-                                    <button type="button" class="btn btn-info"  onclick="replyFunction({{item.comment.CommentID}})"><i class="fa fa-reply fa-lg" aria-hidden="true">Reply</i></button>
+                                }
+                            </div>*@
+                            @*<div class="row">
+    <div class="col-sm-offset-10">
+        <button type="button" class="btn btn-info" onclick="replyFunction('@item.CommentID')"><i class="fa fa-reply fa-lg" aria-hidden="true">Reply</i></button>
 
-                                </div>
-                                <div ng-controller="PostReplyController" id="replycomment{{item.comment.CommentID}}" style="display:none">
+    </div>
+    <div ng-controller="PostReplyController" id="@string.Format("{0}{1}", "replycomment", item.CommentID)" style="display:none">
 
-                                    <form class="form-horizontal" role="form">
+        <form class="form-horizontal" role="form">
 
-                                        <h3 class="bg-success">{{message}}</h3>
-                                        <h3 class="bg-danger" id="replycommentError">{{errorName}}</h3>
+            <h3 class="bg-success">{{message}}</h3>
+            <h3 class="bg-danger" id="replycommentError">{{errorName}}</h3>
 
-                                        <div class="row" style="margin:20px;">
-                                            <h4>Add Comment</h4>
-                                            
-                                            <div class="form-group">
-                                                <label class="control-label col-sm-2" for="replyusername">Name:</label>
-                                                <div class="col-sm-8">
-                                                    <input type="text" class="form-control" name="replyusername" id="replyusername{{item.comment.CommentID}}" placeholder="Enter Name" ng-model="Replyusername" onkeypress="keypressUsernameFunction({{item.comment.CommentID}})">
-                                                </div>
-                                            </div>
+            <div class="row" style="margin:20px;">
+                <h4>Add Comment</h4>
 
-                                            <div class="form-group">
-                                                <label class="control-label col-sm-2" for="replycomment">Comment:</label>
-                                                <div class="col-sm-8">
-                                                    <textarea class="form-control" name="replycommentcontent" id="replycommentcontent{{item.comment.CommentID}}" placeholder="Enter Comment" ng-model="Replycomment" onkeypress="keypressCommentFunction({{item.comment.CommentID}})"></textarea>
-                                                </div>
-                                            </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="replyusername">Name:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="replyusername" id="@string.Format("{0}{1}", "replyusername", item.CommentID)" placeholder="Enter Name" ng-model="Replyusername" onkeypress="keypressUsernameFunction('@item.CommentID')">
+                    </div>
+                </div>
 
-                                            <div class="form-group">
-                                                <div class="col-sm-offset-10">
-                                                    <button type="submit" class="btn btn-default" ng-click="submit()" id="submitreplycommentId" onclick="replyCommentFunction({{item.comment.CommentID}})">Submit</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="replycomment">Comment:</label>
+                    <div class="col-sm-8">
+                        <textarea class="form-control" name="replycommentcontent" id="@string.Format("{0}{1}", "replycommentcontent", item.CommentID)" placeholder="Enter Comment" ng-model="Replycomment" onkeypress="keypressCommentFunction('@item.CommentID')"></textarea>
+                    </div>
+                </div>
 
-                                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-10">
+                        <button type="submit" class="btn btn-default" ng-click="submit()" id="submitreplycommentId" onclick="replyCommentFunction('@item.CommentID')">Submit</button>
+                    </div>
+                </div>
+                <input type="text" name="replyCommentID" id="replyCommentID" ng-model="replyCommentID" style="display:none;" value="" />
+            </div>
+        </form>
+
+    </div>*@
                             </div>
                         </div>
-                    
+                    }
                 </div>
             </div>
         </div>
@@ -129,8 +144,7 @@
 
     function replyFunction(val){
         $("#replycomment"+val).css('display', 'block');
-        $("#replyParentCommentID").val(val);
-
+        $("#replyCommentID").val(val);
         
     }
     
@@ -142,7 +156,12 @@
     });
 
     function replyCommentFunction(val) {
-        console.log("this is a parentCommentID from jquery" + val);
+        //console.log("this is a parentCommentID from jquery" + val);
+        //var controllerElementReply = document.querySelector('[ng-controller="PostReplyController"]');
+        //var controllerScopeReply = angular.element(controllerElementReply).scope();
+        //console.log("jqurey set value to angular scope" + val);
+        //controllerScopeReply.replyCommentID = val;
+        $("#replyCommentID").val(val);
         if ($("#replyusername"+val).val() == "") {
             $("#replyusername" + val).addClass('alert-danger');
             if ($("#replycommentcontent" + val).val() == "") {
@@ -158,10 +177,7 @@
             return false;
         }
 
-        var controllerElement = document.querySelector('[ng-controller="PostReplyController"]');
-        var controllerScope = angular.element(controllerElement).scope();
-        console.log("jqurey set value to angular scope"+ val);
-        controllerScope.replyParentCommentID = val;
+       
     }
 
     function keypressUsernameFunction(val) {

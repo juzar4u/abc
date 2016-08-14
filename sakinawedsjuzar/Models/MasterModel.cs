@@ -1,4 +1,5 @@
 ﻿
+using sakinawedsjuzar.Models.AccountModel;
 using sakinawedsjuzar.Models.CommentModel;
 using System;
 using System.Collections.Generic;
@@ -16,8 +17,9 @@ namespace sakinawedsjuzar.Models
         public List<EntityImage> Groomsmens { get; set; }
         public List<LoveStoryModel> lovestories { get; set; }
         public List<EventModel> events { get; set; }
-        public List<CommentMaster> comments { get; set; }
-        
+        public CommentList comments { get; set; }
+        public LoginModel loginModel { get; set; }
+        public bool isUserLoggedin { get; set; }
 
     }
 }

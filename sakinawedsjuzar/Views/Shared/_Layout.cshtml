@@ -63,18 +63,10 @@
         <div class="container">
             <div class="row">            
                 <div class="col-md-12">            
-                    @*<img src="images/couple.png" alt="Couple Icon" class="img-responsive" data-scroll-reveal="enter top move 35px, after 0.4s" />*@                
+                    <img src="images/couple.png" alt="Couple Icon" class="img-responsive" data-scroll-reveal="enter top move 35px, after 0.4s" />          
                     <div class="col-lg-4 col-md-5" data-scroll-reveal="enter left move 35px, after 0.4s">
-                    	<div class="contact-inf">
-                            <h5 class="subtitle">Contact us</h5>
-                            <form class="frmContact" action="">
-                                <input type="hidden" value="support@pixxett.com" name="emailTo" />
-                                <input type="text" placeholder="Your Name..." value="" id="txtName" name="txtName" required />
-                                <input type="text" placeholder="Your Email Address..." value="" id="txtEmail" name="txtEmail" required />
-                                <textarea placeholder="Your Message..." id="txtText" name="txtText" required></textarea>
-                                <button class="btnSend" type="submit">Send Message</button>
-                            </form>
-                        </div>
+                         @Html.Partial("~/Views/Shared/ContactUsPartial.cshtml")
+                                                
                     </div>
 
                     <div class="col-lg-4 col-md-5 pull-right" data-scroll-reveal="enter right move 35px, after 0.4s">
@@ -124,3 +116,9 @@
         
 </body>
 </html>
+<script type="text/javascript">
+   
+    function Logout() {
+        window.location = '/Account/Logout';
+    }
+</script>

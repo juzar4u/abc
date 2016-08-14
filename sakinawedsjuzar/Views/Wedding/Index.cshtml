@@ -1,5 +1,12 @@
 ﻿@model sakinawedsjuzar.Models.MasterModel
 
+<style>
+    #dropdown-nav li a{
+        margin-top:15px;
+        font-size:16px;
+
+    }
+</style>
 <div id="wrapper-firefly" class="wrapper">
 
     <div class="container">
@@ -40,7 +47,7 @@
                         <h4 class="modal-title">Sign In</h4>
                     </div>
                     <div class="modal-body">
-                        @Html.Partial("~/Views/Shared/PartialLogin.cshtml")
+                        @Html.Partial("~/Views/Shared/PartialLogin.cshtml", Model.loginModel)
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -114,18 +121,35 @@
         </div>
 
     </div>
+    <div class="dropdown col-xs-2">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Navigate
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" id="dropdown-nav" aria-labelledby="dropdownMenu1">
+            <li><a href="#Introduction" data-scroll>Introduction</a></li>
+            <li><a href="#moments" data-scroll>Our moments</a></li>
+            <li><a href="#ourstory_timeline" data-scroll>Our Story</a></li>
+            <li><a href="#events" data-scroll>Our Events</a></li>
+            <li><a href="#comment_timeline" data-scroll>Comments</a></li>
+            <li><a href="#contactus" data-scroll>Contact us</a></li>
+        </ul>
+    </div>
     <div class="dropdown col-xs-offset-8 col-lg-offset-10">
         <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             Settings
     <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" id="dropdownList">
-            <li><a href="#" data-toggle="modal" data-target="#signin">SignIn</a></li>
-            <li><a href="#" data-toggle="modal" data-target="#register">Register</a></li>
+            <li><a href="#" data-toggle="modal" data-target="#signin">Admin SignIn</a></li>
+            @if (Model.isUserLoggedin)
+            {
             <li role="separator" class="divider"></li>
             <li><a href="#" data-toggle="modal" data-target="#myModal">Post Common Info</a></li>
             <li><a href="#" data-toggle="modal" data-target="#myLoveStory">Stories</a></li>
             <li><a href="#" data-toggle="modal" data-target="#myEvent">Events</a></li>
+            <li><a onclick="Logout()" >Logout</a></li>
+            }
         </ul>
     </div>
     <div class="main">
@@ -142,7 +166,7 @@
         <div class="clearfix"></div>
 
         <!-- Countdown Section Start -->
-        <h1 class="section-title">We are Launching On:</h1>
+        <h1 class="section-title">Days Remaining for Our Big Day!:</h1>
         <div class="countdown-section" id="anchor" data-stellar-background-ratio="0.3">
             <div class="container wedding-info">
                 <div class="row">
@@ -235,7 +259,7 @@
         <!-- About Section End -->
 
         <!-- Comment Section Start -->
-        <h1 class="section-title">Comments</h1>
+        <h1 class="section-title" id="comment_timeline">Comments</h1>
         @Html.Partial("~/Views/Wedding/PartialComment.cshtml")
         <div class="clearfix"></div>
 

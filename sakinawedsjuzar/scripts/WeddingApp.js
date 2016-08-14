@@ -301,13 +301,13 @@ weddingApp.controller("PostCommentController", function ($scope, $http) {
 weddingApp.controller("PostReplyController", function ($scope, $http) {
 
     $scope.submit = function () {
-        console.log("from angularController" + $scope.replyParentCommentID);
+        console.log("from angularController" + $scope.replyCommentID);
         $http({
             method: 'POST',
             url: '/api/WeddingAPI/PostReplyComment',
             data: {
                 "Username": $scope.Replyusername,
-                "ParentCommentID": $scope.replyParentCommentID,
+                "ParentCommentID": $scope.replyCommentID,
                 "Comment": $scope.Replycomment
             }, //forms user object
             headers: { 'Content-Type': 'application/json' }
@@ -319,17 +319,42 @@ weddingApp.controller("PostReplyController", function ($scope, $http) {
     }
 
 });
-weddingApp.controller("CommentSectionController", function ($scope, $http) {
 
+weddingApp.controller("PostContactUs", function ($scope, $http) {
+
+    $scope.submit = function () {
+        
         $http({
-            method: 'GET',
-            url: '/api/WeddingAPI/GetComments', 
+            method: 'POST',
+            url: 'api/WeddingAPI/PostContactUsData',
+            data: {
+                "Name": $scope.Name,
+                "EmailID": $scope.EmailID,
+                "PhoneNo": $scope.PhoneNo,
+                "Msg": $scope.Msg
+            }, //forms user object
             headers: { 'Content-Type': 'application/json' }
         })
           .success(function (data) {
-              console.log(data.Comments);
-              console.log(data.Comments.childcomments);
+              $scope.message = data.Message;
+
           });
-    
+    }
 
 });
+//weddingApp.controller("CommentSectionController", function ($scope, $http) {
+
+//        $http({
+//            method: 'GET',
+//            url: '/api/WeddingAPI/GetComments', 
+//            headers: { 'Content-Type': 'application/json' }
+//        })
+//          .success(function (data) {
+
+//              $scope.ParentComments = data.ParentComments;
+//              console.log(data.ParentComments);
+//              //console.log(data.ParentComments.childcomments);
+//          });
+    
+
+//});

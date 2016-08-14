@@ -256,11 +256,20 @@ namespace sakinawedsjuzar
             {
                 Comment comment = new Comment();
                 var jObj = (JObject)data;
-
                 comment.UserName = jObj["Username"].Value<string>();
                 comment.Content = jObj["Comment"].Value<string>();
-                Services.GetInstance.insertComment(comment);
-                response = this.Request.CreateResponse(HttpStatusCode.Created, new { Created = 200, Message = "Comment has been Posted Successfully!" });
+                comment.datetimenow = DateTime.Now;
+                bool isExists = Services.GetInstance.isCommentExist(comment.UserName, comment.Content);
+                if(isExists == false)
+                { 
+                    Services.GetInstance.insertComment(comment);
+                    response = this.Request.CreateResponse(HttpStatusCode.Created, new { Created = 200, Message = "Comment has been Posted Successfully!" });
+                }
+                else
+                {
+                    response = this.Request.CreateResponse(HttpStatusCode.Created, new { Created = 200, Message = "Comment Already Exists!" });
+                }
+
             }
             catch (Exception ex)
             {
@@ -280,8 +289,18 @@ namespace sakinawedsjuzar
                 comment.UserName = jObj["Username"].Value<string>();
                 comment.Content = jObj["Comment"].Value<string>();
                 comment.ParentCommentID = jObj["ParentCommentID"].Value<int>();
-                Services.GetInstance.insertComment(comment);
-                response = this.Request.CreateResponse(HttpStatusCode.Created, new { Created = 200, Message = "Comment has been Posted Successfully!" });
+                comment.datetimenow = DateTime.Now;
+                bool isExists = Services.GetInstance.isCommentExist(comment.UserName, comment.Content);
+                if(isExists == false)
+                {
+                    Services.GetInstance.insertComment(comment);
+                    response = this.Request.CreateResponse(HttpStatusCode.Created, new { Created = 200, Message = "Comment has been Posted Successfully!" });
+                }
+                else
+                {
+                    response = this.Request.CreateResponse(HttpStatusCode.Created, new { Created = 200, Message = "Comment Already Exists!" });
+                }
+                
             }
             catch (Exception ex)
             {
@@ -291,10 +310,37 @@ namespace sakinawedsjuzar
         }
 
 
+        public HttpResponseMessage PostContactUsData([FromBody]dynamic data)
+        {
+            HttpResponseMessage response = null;
+            try
+            {
+                ContactUs contactUs = new ContactUs();
+                var jObj = (JObject)data;
+
+                contactUs.Name = jObj["Name"].Value<string>();
+                contactUs.EmailID = jObj["EmailID"].Value<string>();
+                contactUs.PhoneNo = jObj["PhoneNo"].Value<string>();
+                contactUs.Msg = jObj["Msg"].Value<string>();
+               
+                EmailService.GetInstance.sendEmail(string.Format("{0}{1}{2}{3}{4}{5}", "Application:S & J portal:  Contact Us Request By", " ", contactUs.Name, " ", "EmailID:", contactUs.EmailID), contactUs.Msg, "juzar.noorani.mca@gmail.com", "admin@danatev.com");
+                response = this.Request.CreateResponse(HttpStatusCode.Created, new { Created = 200, Message = "We will get in touch shortly!" });
+                Services.GetInstance.InsertContactUs(contactUs);
+
+            }
+            catch (Exception ex)
+            {
+                response = this.Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+            }
+            return response;
+        }
+
+        
+
         public CommentList GetComments()
         {
             CommentList comment = new CommentList();
-            comment.ParentComments = Services.GetInstance.GetComments();
+            comment = Services.GetInstance.GetComments();
 
             return comment;
         }
